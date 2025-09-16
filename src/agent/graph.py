@@ -34,14 +34,15 @@ class State:
 
 
 async def call_model(state: State, runtime: Runtime[Context]) -> Dict[str, Any]:
-    """Process input and returns output.
+    my_param = None
+    if runtime.context:
+        my_param = runtime.context.get("my_configurable_param")
 
-    Can use runtime context to alter behavior.
-    """
     return {
         "changeme": "output from call_model. "
-        f"Configured with {runtime.context.get('my_configurable_param')}"
+        f"Configured with {my_param}"
     }
+
 
 
 # Define the graph
